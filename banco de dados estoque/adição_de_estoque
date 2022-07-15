@@ -1,0 +1,669 @@
+from ast import If
+from re import I
+import sqlite3
+
+print('Adição de estoque')
+
+print('CATEGORIAS')
+menu = """
+1 -> Veiculos
+2 -> Super mercado
+3 -> Casa e Moveis
+4 -> Eletrodomésticos
+5 -> Esporte e fitness
+6 -> Ferramentas
+7 -> Construção
+8 -> Industria e Comercio
+9 -> Saúde
+10 -> Acessorios para carros
+11 -> Beleza e cuidados pessoais
+12 -> Moda
+13 -> Brinquedos
+14 -> Imoveis
+
+"""
+print(menu)
+
+categoria = int(input('Qual categoria deseja adicionar ? '))
+if categoria > 14 :
+    print('Categoria não existente')
+if categoria == 1:
+    print('categoria veiculos')
+    marca = str(input('Qual a marca do veiculo ? '))
+    modelo = str(input('Qual modelo do veiculo ? '))
+    ano = int(input('Qual ano do veiculo ? '))
+    valor = int(input('Qual valor do veiculo ? '))
+    print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+    
+    banco = sqlite3.connect('banco_veiculos.db')
+    cursor = banco.cursor()
+    #cursor.execute("CREATE TABLE veiculos (marca text, modelo text, ano interger, valor interger)")
+    cursor.execute("INSERT INTO veiculos VALUES('"+marca+"', '"+modelo+"',"+str(ano)+", '"+str(valor)+"')")
+    banco.commit()
+    cursor.execute("SELECT * FROM veiculos")
+    #print(cursor.fetchall()) #print de todos os arquivos acicionados acicionados no banco de dados especifico
+    
+elif categoria == 2 :
+    nome = str(input('Qual o nome do produto : '))
+    quantidade = int(input('Qual a quantidade do produto : '))
+    valor  = float(input('Qual valor do produto : '))
+    print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+    
+    banco = sqlite3.connect('banco_mercado.db')
+    cursor = banco.cursor()
+    #cursor.execute("CREATE TABLE mercado (nome text, quantidade interger, valor interger)")
+    cursor.execute("INSERT INTO mercado VALUES('"+nome+"',"+str(quantidade)+", '"+str(valor)+"')")
+    banco.commit()
+    cursor.execute("SELECT * FROM mercado")
+    #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico
+    
+elif categoria == 3 :
+    opcao = int(input('opções para esta categoria : 1 (moveis)\n 2 (objetos de decoração) '))
+    if opcao == 1 :
+        print('Moveis')
+        nome = str(input('Qual o nome do produto : '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+        banco = sqlite3.connect('banco_moveis.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE moveis (nome text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO moveis VALUES('"+nome+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM moveis")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico
+        
+    elif opcao == 2 :
+        print('Objetos de decoração')
+        nome = str(input('Qual o nome do produto : '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))   
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')     
+        
+        banco = sqlite3.connect('banco_decoracao.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE decoracao (nome text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO decoracao VALUES('"+nome+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM decoracao")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico
+        
+elif categoria == 4 :
+    print('Categoria eletrodomésticos')
+    nome = str(input('Qual o nome do produto : '))
+    quantidade = int(input('Qual a quantidade do produto : '))
+    valor  = float(input('Qual valor do produto : '))
+    print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+    
+    banco = sqlite3.connect('banco_eletrodomesticos.db')
+    cursor = banco.cursor()
+    #cursor.execute("CREATE TABLE eletrodomesticos (nome text, quantidade interger, valor interger)")
+    cursor.execute("INSERT INTO eletrodomesticos VALUES('"+nome+"',"+str(quantidade)+", '"+str(valor)+"')")
+    banco.commit()
+    cursor.execute("SELECT * FROM eletromesticos")   
+     #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico
+
+elif categoria == 5 :
+    print('Categoria esportes e fitness')
+    opcoes_esportes = int(input('opções para esta categoria : \n 1 (suplementos)\n 2 (equipamentos)\n 3 (moda fitness) '))
+    if opcoes_esportes == 1:
+        print('Suplementos')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto:'))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+        banco = sqlite3.connect('banco_suplementos.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE suplementos (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO suplementos VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM suplementos")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico       
+
+    elif opcoes_esportes == 2 :
+        print('Equipamentos')    
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO') 
+        
+        banco = sqlite3.connect('banco_equipamentos.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE equipamentos (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO equipamentos VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM equipamentos")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico 
+        
+    elif opcoes_esportes == 3 :
+        print('Moda fitness')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO') 
+        
+        banco = sqlite3.connect('banco_moda.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE moda (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO moda VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM moda")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico          
+        
+elif categoria == 6 :
+    print('Categoria Ferramentas')
+    ferramentas = int(input('opções para esta categoria :\n 1 (Ferramentas Manuais)\n 2 (Ferramentas Eletricas) : '))
+    if ferramentas == 1 :
+        print('Ferramentas Manuais')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+        banco = sqlite3.connect('banco_ferramentas_m.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE ferramentas_m (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO ferramentas_m VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM ferramentas_m")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico 
+        
+    elif ferramentas == 2 :
+        print('Ferramentas Eletricas')        
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+        banco = sqlite3.connect('banco_ferramentas_e.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE ferramentas_e (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO ferramentas_e VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM ferramentas_e")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico          
+elif categoria == 7 : 
+    print('Categoria Construção')
+    construcao = int(input('Opções para esta categoria :\n 01 (Materiais de Obra)\n 02 (Maquinas para Construção) : '))
+    if construcao == 1 :
+        print('Materiais de Obra')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+
+        banco = sqlite3.connect('banco_materiais_obra.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE materiais_obra (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO materiais_obra VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM materiais_obra")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico  
+          
+    elif construcao == 2:
+        print ('Maquinas para Construção')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO') 
+                
+        banco = sqlite3.connect('banco_maquina_obra.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE maquina_obra (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO maquina_obra VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM maquina_obra")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico 
+                       
+elif categoria == 8:
+    print('Categoria Industria e Comercio')       
+    industria_comercio = int(input('Opções para esta categoria :\n 1 (Comercio)\n 2 (Escritorio)'))
+    if industria_comercio == 1:
+        print('Comercio')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+
+        banco = sqlite3.connect('banco_comercio.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE comercio (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO comercio VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM comercio")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico
+        
+    elif industria_comercio == 2:
+        print('Escritorio')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+
+        banco = sqlite3.connect('banco_escritorio.db')
+        cursor = banco.cursor()
+        cursor.execute("CREATE TABLE escritorio (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO escritorio VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM escritorio")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico   
+         
+elif categoria == 9:
+    print('Saúde')
+    saude = int(input('Opções para esta categoria :\n 1 (Farmacia)\n 2 (Equipamentos de saúde) '))
+    if saude == 1:
+        print('Farmacia')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+        
+        banco = sqlite3.connect('banco_farmacia.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE farmacia (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO farmacia VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM farmacia")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico 
+        
+    if saude == 2:
+        print('Equipamentos de saúde')
+        nome = str(input('Qual o nome do produto : '))
+        marca = str(input('Qual a marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+        
+        banco = sqlite3.connect('banco_equipamento_saude.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE equipamento_saude (nome text, marca text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO equipamento_saude VALUES('"+nome+"','"+marca+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM equipamento_saude")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico   
+             
+elif categoria == 10:
+    print('Categoria Acessorios para carros')
+    carros = int(input('Opções para esta categoria :\n 1 (pneu)\n 2 (suspensão e direção)\n 3 (motor)\n'
+                       ' 4 (som automotivo)\n 5 (iluminação)\n Qual opção :  '))
+    if carros == 1:
+        print('Pneus')
+        nome = str(input('Qual marca do produto : '))
+        tamanho = str(input('Qual tamanho e aro do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO') 
+        
+        banco = sqlite3.connect('banco_pneus.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE pneus(nome text, tamanho text, quantidade interger, valor interger)")
+        cursor.execute("INSERT INTO pneus VALUES('"+nome+"','"+str(tamanho)+"',"+str(quantidade)+", '"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM pneus")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico
+         
+    elif carros == 2:
+        print('suspensão e direção')
+        marca = str(input('Qual marca do produto : '))
+        posicao = str(input('Qual posição do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        modelo = str(input('Para qual marca e modelo de carro : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+                  
+        banco = sqlite3.connect('banco_suspesao.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE suspensao(marca text, posicao text, quantidade interger, modelo text, valor interger)")
+        cursor.execute("INSERT INTO suspensao VALUES('"+marca+"','"+str(posicao)+"','"+str(quantidade)+"', '"+str(modelo)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM suspensao")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico
+        
+    elif carros == 3:
+        print('Motor')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        modelo = str(input('Para qual marca e modelo de carro : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+ 
+        banco = sqlite3.connect('banco_motor.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE motor(marca text, posicao text, quantidade interger, modelo text, valor interger)")
+        cursor.execute("INSERT INTO motor VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(modelo)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM motor")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico  
+    
+    elif carros == 4:
+        print('Som automotivo')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        modelo = str(input('Para qual marca e modelo de carro : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')            
+ 
+        banco = sqlite3.connect('banco_som.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE som(marca text, posicao text, quantidade interger, modelo text, valor interger)")
+        cursor.execute("INSERT INTO som VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(modelo)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM som")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.
+        
+    elif carros == 5:
+        print('Iluminação')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        modelo = str(input('Para qual marca e modelo de carro : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')                  
+        
+        banco = sqlite3.connect('banco_iluminacao.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE iluminacao(marca text, posicao text, quantidade interger, modelo text, valor interger)")
+        cursor.execute("INSERT INTO iluminacao VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(modelo)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM iluminacao")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.        
+        
+elif categoria == 11:
+    print('Beleza e cuidado pessoas')
+    beleza = int(input('Opções para esta categoria :\n 1 (Perfumes)\n 2 (Equipamentos para beleza)\n Qual das opções :  '))
+    if beleza == 1:
+        print('Perfumes')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        mls = int(input('Quantos mls tem o perfume : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+        
+        banco = sqlite3.connect('banco_perfume.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE perfume(marca text, posicao text, quantidade interger, mls interger, valor interger)")
+        cursor.execute("INSERT INTO perfume VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(mls)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM perfume")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico. 
+    elif beleza == 2:
+        print('Equipamentos para beleza')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        voltagem = int(input('Quantos watts tem o produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+        
+        banco = sqlite3.connect('banco_equipamentos_beleza.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE equipamentos_beleza(marca text, posicao text, quantidade interger, voltagem interger, valor interger)")
+        cursor.execute("INSERT INTO equipamentos_beleza VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(voltagem)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM equipamentos_beleza")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.
+        
+elif categoria == 12:
+    print('Categoria Moda')
+    cat_moda = int(input('Opções para esta categoria :\n 1 (Camisa)\n '
+                       '2 (Calça)\n 3 (Saia)\n 4 (Vestido)\n 5 (Calçados)\n Qual das opções :  '))  
+    if cat_moda == 1:
+        print('Camisa')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        tecido = str(input('Qual tecido do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+
+        banco = sqlite3.connect('banco_camisa.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE camisa(marca text, posicao text, quantidade interger, tecido text, valor interger)")
+        cursor.execute("INSERT INTO camisa VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(tecido)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM camisa")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.
+        
+    elif cat_moda == 2:
+        print('Calça')  
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        tecido = str(input('Qual tecido do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+                             
+        banco = sqlite3.connect('banco_calca.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE calca(marca text, posicao text, quantidade interger, tecido text, valor interger)")
+        cursor.execute("INSERT INTO calca VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(tecido)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM calca")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.                  
+      
+    elif cat_moda == 3:
+        print('Saia')  
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        tecido = str(input('Qual tecido do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+        
+        banco = sqlite3.connect('banco_saia.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE saia(marca text, posicao text, quantidade interger, tecido text, valor interger)")
+        cursor.execute("INSERT INTO saia VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(tecido)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM saia")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico. 
+        
+    elif cat_moda == 4:
+        print('Vestido')  
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        tecido = str(input('Qual tecido do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+        
+        banco = sqlite3.connect('banco_vestido.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE vestido(marca text, posicao text, quantidade interger, tecido text, valor interger)")
+        cursor.execute("INSERT INTO vestido VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(tecido)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM vestido")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.        
+        
+    elif cat_moda == 5:
+        print('Calçados')  
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        tecido = str(input('Qual tecido do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')  
+        
+        banco = sqlite3.connect('banco_calcado.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE calcado(marca text, posicao text, quantidade interger, tecido text, valor interger)")
+        cursor.execute("INSERT INTO calcado VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(tecido)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM calcado")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.         
+        
+elif categoria == 13:
+    print('Categoria Brinquedos')
+    tipos = int(input('Opções para esta categoria :\n 1 (0 a 24 meses)\n '
+                       '2 (2 a 4 anos)\n 3 (5 a 7 anos)\n 4 (8 anos ou mais)\n Qual das opções :  '))
+    if tipos == 1:
+        print('Brinquedos de 0 a 24 meses')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        material = str(input('Qual e o material do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')    
+        
+        banco = sqlite3.connect('banco_rescen_nascido.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE rescen_nascido(marca text, posicao text, quantidade interger, material text, valor interger)")
+        cursor.execute("INSERT INTO rescen_nascido VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(material)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM rescen_nascido")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.         
+        
+    if tipos == 2:
+        print('Brinquedos de 2 a 4 anos')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        material = str(input('Qual e o material do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')    
+        
+        banco = sqlite3.connect('banco_dois_anos.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE dois_anos(marca text, posicao text, quantidade interger, material text, valor interger)")
+        cursor.execute("INSERT INTO dois_anos VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(material)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM dois_anos")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.         
+               
+    if tipos == 3:
+        print('Brinquedos de 5 a 7 anos')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        material = str(input('Qual e o material do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')    
+        
+        banco = sqlite3.connect('banco_sete_anos.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE sete_anos(marca text, posicao text, quantidade interger, material text, valor interger)")
+        cursor.execute("INSERT INTO sete_anos VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(material)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM sete_anos")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.         
+                      
+    if tipos == 4:
+        print('Brinquedos de 8 anos ou mais')
+        nome = str(input('Qual nome do produto : '))
+        marca = str(input('Qual marca do produto: '))
+        quantidade = int(input('Qual a quantidade do produto : '))
+        material = str(input('Qual e o material do produto : '))
+        valor  = float(input('Qual valor do produto : '))
+        print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')    
+        
+        banco = sqlite3.connect('banco_oito_anos.db')
+        cursor = banco.cursor()
+        #cursor.execute("CREATE TABLE oito_anos(marca text, posicao text, quantidade interger, material text, valor interger)")
+        cursor.execute("INSERT INTO oito_anos VALUES('"+nome+"','"+str(marca)+"','"+str(quantidade)+"', '"+str(material)+"','"+str(valor)+"')")
+        banco.commit()
+        cursor.execute("SELECT * FROM oito_anos")
+        #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.  
+        
+elif categoria == 14:
+    print('Categoria Imoveis')
+    imoveis = int(input('Opções para esta categoria :\n 1 (Casa)\n '
+                       '2 (apartamento)\n Qual das opções :  '))
+    if imoveis == 1:
+        print('Casa')
+        casa = int(input('Opções para esta categoria :\n 1 (vender)\n 2 (alugar)\n Qual das opções : '))
+        if casa == 1:
+            print('vender')
+            local = str(input('Qual local da casa : '))
+            quartos = int(input('Quantos quartos: '))
+            garagem = int(input('Qual a quantidade de vagas na garagem : '))
+            banheiros = int(input('Quantos banheiros : '))
+            valor  = float(input('Qual valor da venda : '))
+            print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+            banco = sqlite3.connect('banco_casa_venda.db')
+            cursor = banco.cursor()
+            cursor.execute("CREATE TABLE casa_venda(local text, quartos interger, garagem interger, banheiro interger, valor interger)")
+            #cursor.execute("INSERT INTO casa_venda VALUES('"+local+"','"+str(quartos)+"','"+str(garagem)+"', '"+str(banheiros)+"','"+str(valor)+"')")
+            banco.commit()
+            cursor.execute("SELECT * FROM casa_venda")
+            #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.    
+            
+        if casa == 2:
+            print('alugar')
+            local = str(input('Qual local da casa : '))
+            quartos = int(input('Quantos quartos: '))
+            garagem = int(input('Qual a quantidade de vagas na garagem : '))
+            banheiros = int(input('Quantos banheiros : '))
+            valor  = float(input('Qual valor do aluguel : '))
+            print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+            banco = sqlite3.connect('banco_casa_aluguel.db')
+            cursor = banco.cursor()
+            #cursor.execute("CREATE TABLE casa_aluguel(local text, quartos interger, garagem interger, banheiro interger, valor interger)")
+            cursor.execute("INSERT INTO casa_aluguel VALUES('"+local+"','"+str(quartos)+"','"+str(garagem)+"', '"+str(banheiros)+"','"+str(valor)+"')")
+            banco.commit()
+            cursor.execute("SELECT * FROM casa_aluguel")
+            #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.   
+        
+    elif imoveis == 2:     
+        print('apartamento')
+        apartamento = int(input('Opções para esta categoria :\n 1 (vender)\n 2 (alugar)\n Qual das opções : '))
+        if apartamento == 1:
+            print('vender')            
+            local = str(input('Qual local do apartamento : '))
+            quartos = int(input('Quantos quartos: '))
+            garagem = int(input('Qual a quantidade de vagas na garagem : '))
+            banheiros = int(input('Quantos banheiros : '))
+            valor  = float(input('Qual valor da venda : '))
+            print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+            banco = sqlite3.connect('banco_apartamento_venda.db')
+            cursor = banco.cursor()
+            cursor.execute("CREATE TABLE apartamento_venda(local text, quartos interger, garagem interger, banheiro interger, valor interger)")
+            #cursor.execute("INSERT INTO apartamento_venda VALUES('"+local+"','"+str(quartos)+"','"+str(garagem)+"', '"+str(banheiros)+"','"+str(valor)+"')")
+            banco.commit()
+            cursor.execute("SELECT * FROM apartamento_venda")
+            #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico                   
+        
+        if apartamento == 2:
+            print('alugar')
+            local = str(input('Qual local do apartamento : '))
+            quartos = int(input('Quantos quartos: '))
+            garagem = int(input('Qual a quantidade de vagas na garagem : '))
+            banheiros = int(input('Quantos banheiros : '))
+            valor  = float(input('Qual valor do aluguel : '))
+            print('PRODUTO ADICIONADO AO ESTOQUE COM SUCESSO')
+        
+            banco = sqlite3.connect('banco_apartamento_aluguel.db')
+            cursor = banco.cursor()
+            cursor.execute("CREATE TABLE apartamento_aluguel(local text, quartos interger, garagem interger, banheiro interger, valor interger)")
+            cursor.execute("INSERT INTO apartamento_aluguel VALUES('"+local+"','"+str(quartos)+"','"+str(garagem)+"', '"+str(banheiros)+"','"+str(valor)+"')")
+            banco.commit()
+            cursor.execute("SELECT * FROM apartamento_aluguel")
+            #print(cursor.fetchall()) #print de todos os arquivos acicionados no banco de dados especifico.           
+        
+        
+        
+        
+
+    
+
+
+
+
+
